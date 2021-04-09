@@ -1,3 +1,57 @@
+class TypeWriter2 {
+  constructor(txtElement, words, wait = 3000) {
+    this.txtElement = txtElement;
+    this.words = words;
+    this.txt = '';
+    this.wordIndex = 0;
+    this.wait = parseInt(wait, 10);
+    this.type();
+    this.isDeleting = false;
+  }
+
+  type() {
+    // Current index of word
+    const current = this.wordIndex % this.words.length;
+    // Get full text of current word
+    const fullTxt = this.words[current];
+
+    // Check if deleting
+    if(this.isDeleting) {
+      // Remove char
+      this.txt = fullTxt.substring(0, this.txt.length - 1);
+    } else {
+      // Add char
+      this.txt = fullTxt.substring(0, this.txt.length + 1);
+    }
+
+    // Insert txt into element
+    this.txtElement.innerHTML = `<h2 class="txt">${this.txt}</h2>`;
+
+    // Initial Type Speed
+    let typeSpeed = 55;
+
+    if(this.isDeleting) {
+      typeSpeed /= 2;
+    }
+
+    // If word is complete
+    if(!this.isDeleting && this.txt === fullTxt) {
+      // Make pause at end
+      typeSpeed = this.wait;
+      // Set delete to true
+      this.isDeleting = true;
+    } else if(this.isDeleting && this.txt === '') {
+      this.isDeleting = false;
+      // Move to next word
+      this.wordIndex++;
+      // Pause before start typing
+      typeSpeed = 500;
+    }
+
+    setTimeout(() => this.type(), typeSpeed);
+  }
+}
+
 
 // ES6 Class
 class TypeWriter {
@@ -68,7 +122,7 @@ class TypeWriter {
           console.log(this.name);
           var element = document.getElementById("button");
           var para = document.createElement("button");
-          var node = document.createTextNode("Maybe not");
+          var node = document.createTextNode("I Agree!!!");
           para.appendChild(node);
           var att = document.createAttribute("id");
           att.value = "notOke";
@@ -107,19 +161,27 @@ class TypeWriter {
   
   // Init App
   function init() {
-     txtElement = document.querySelector('.txt-header1');
+    //  txtElement = document.querySelector('.txt-header1');
+    //  words = JSON.parse(txtElement.getAttribute('data-words'));
+    //  wait = txtElement.getAttribute('data-wait');
+    //  isDeleted = txtElement.getAttribute('willDelete');
+    //  speed = txtElement.getAttribute('speed');
+    //  new TypeWriter(txtElement, words, wait, isDeleted,speed, 1);
+  
+     setTimeout(()=>{ txtElement = document.querySelector('.txt-header1');
      words = JSON.parse(txtElement.getAttribute('data-words'));
      wait = txtElement.getAttribute('data-wait');
      isDeleted = txtElement.getAttribute('willDelete');
      speed = txtElement.getAttribute('speed');
-     new TypeWriter(txtElement, words, wait, isDeleted,speed, 1);
+     new TypeWriter(txtElement, words, wait, isDeleted,speed, 1);},4000);
+  
 
    setTimeout(()=>{ txtElement = document.querySelector('.txt-body1');
    words = JSON.parse(txtElement.getAttribute('data-words'));
    wait = txtElement.getAttribute('data-wait');
    isDeleted = txtElement.getAttribute('willDelete');
    speed = txtElement.getAttribute('speed');
-   new TypeWriter(txtElement, words, wait, isDeleted,speed, 1);},5);
+   new TypeWriter(txtElement, words, wait, isDeleted,speed, 1);},5200);
 
   
     setTimeout(()=>{ txtElement = document.querySelector('.txt-body2');
@@ -127,20 +189,44 @@ class TypeWriter {
     wait = txtElement.getAttribute('data-wait');
     isDeleted = txtElement.getAttribute('willDelete');
     speed = txtElement.getAttribute('speed');
-    new TypeWriter(txtElement, words, wait, isDeleted,speed, 1);},5);
+    new TypeWriter(txtElement, words, wait, isDeleted,speed, 1);},26680);
  
+
+
     setTimeout(()=>{ txtElement = document.querySelector('.txt-body3');
     words = JSON.parse(txtElement.getAttribute('data-words'));
     wait = txtElement.getAttribute('data-wait');
     isDeleted = txtElement.getAttribute('willDelete');
     speed = txtElement.getAttribute('speed');
-    new TypeWriter(txtElement, words, wait, isDeleted,speed, 2);},5);
+    new TypeWriter(txtElement, words, wait, isDeleted,speed, 1);},85210);
 
+    setTimeout(()=>{ txtElement = document.querySelector('.txt-body4');
+    words = JSON.parse(txtElement.getAttribute('data-words'));
+    wait = txtElement.getAttribute('data-wait');
+    isDeleted = txtElement.getAttribute('willDelete');
+    speed = txtElement.getAttribute('speed');
+    new TypeWriter(txtElement, words, wait, isDeleted,speed, 1);},141960);
 
-   setTimeout(()=>{
-    //var body = document.body;
-    //body.removeChild(document.getElementById('container'));
-    //document.getElementById('container').style.display = "none";
-    //document.getElementById('afterall').style.display = "block";
-   },3000);
+    setTimeout(()=>{ txtElement = document.querySelector('.txt-body5');
+    words = JSON.parse(txtElement.getAttribute('data-words'));
+    wait = txtElement.getAttribute('data-wait');
+    isDeleted = txtElement.getAttribute('willDelete');
+    speed = txtElement.getAttribute('speed');
+    new TypeWriter(txtElement, words, wait, isDeleted,speed, 1);},187960);
+
+    setTimeout(()=>{
+      const txtElementz = document.querySelector('.txt-body6');
+    const wordsz = JSON.parse(txtElementz.getAttribute('data-words'));
+    const waitz = txtElementz.getAttribute('data-wait');
+    new TypeWriter2(txtElementz, wordsz, waitz);
+
+    },193960);
+
+    setTimeout(()=>{ txtElement = document.querySelector('.txt-body7');
+    words = JSON.parse(txtElement.getAttribute('data-words'));
+    wait = txtElement.getAttribute('data-wait');
+    isDeleted = txtElement.getAttribute('willDelete');
+    speed = txtElement.getAttribute('speed');
+    new TypeWriter(txtElement, words, wait, isDeleted,speed, 2);},195000);
+
   }
